@@ -4,14 +4,25 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap");
 
-.heading{
-  @apply lg:text-4xl text-center font-medium sm:text-3xl text-2xl{
+@layer components {
+  .heading {
+    @apply lg:text-4xl text-center font-medium sm:text-3xl text-2xl
+  }
+
+  .button {
+    @apply cursor-pointer rounded text-center p-2 text-sm text-white bg-gradient-to-b from-primary-light to-primary-dark border border-primary-light focus:outline-none focus:ring-2 focus:ring-primary-dark active:from-primary-dark;
+
+  }
+
+  .button-ghost {
+    @apply cursor-pointer rounded text-center p-2 text-sm text-primary-light focus:outline-none border-2 border-primary-light hover:shadow-md focus:shadow-md active:shadow-md;
   }
 }
 
-.heading::after{
+
+.heading::after {
   display: block;
-  height:2px;
+  height: 2px;
   background-color: #ab3c2a;
   content: '';
   width: 100px;
