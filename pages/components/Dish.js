@@ -13,8 +13,8 @@ function Dish({ _id, title, price, description, category, image }) {
         </p>
         <Image
           src={image}
-          height={200}
-          width={200}
+          height={300}
+          width={300}
           alt=""
           objectFit="cover"
           objectPosition="center"
