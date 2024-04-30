@@ -6,6 +6,7 @@ import HowitWork from './components/HowitWork'
 import Menu from './components/Menu'
 import Testimonials from './components/Testimonials'
 import Footer from './components/Footer'
+import Header from './components/Header'
 import { connectToDatabase } from './components/utils/mongodb'
 import getDishes from './components/utils/getDishes'
 import getCategories from './components/utils/getCategories'
@@ -21,7 +22,7 @@ export default function Home({dishes,categories}) {
     console.error(error)
   }
   return (
-    <><Banner /><About /><Info /><FoodGallery /><HowitWork /><Menu dishes={dishes} categories={categories}/><Testimonials/><Footer/></>
+    <><Header></Header><Banner /><About /><Info /><FoodGallery /><HowitWork /><Menu dishes={dishes} categories={categories}/><Testimonials/><Footer/></>
   );
 }
 export const getStaticProps = async () => {
