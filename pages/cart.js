@@ -35,7 +35,7 @@ function Cart() {
                                             {items?.length}
                                         </span>
                                     </span>
-                                    <button className={`button-red py-2 px-8 xs:px-10 ${disabled ? "opacity-50" : ""}`}  disabled={disabled}>Empty Cart</button>
+                                    <button className={`button-red py-2 px-8 xs:px-10 ${disabled ? "opacity-50" : ""}`} onClick={()=>dispatch(emptycart())}  disabled={disabled}>Empty Cart</button>
                                 </div>
                                 {items.map((item, i) => (
                                     <CartDish key={`cart-dish-${item?._id}`}
