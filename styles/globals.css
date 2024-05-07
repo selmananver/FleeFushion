@@ -35,3 +35,14 @@
 .font-extrabold{
   font-weight: 800;
 }
+.dropdownOption{
+  width:100%;
+  padding:0.5rem 0.75rem;
+  cursor: pointer;
+}
+@media only screen and (max-width: 780px) {
+  .heightFix {
+    min-height: calc(100vh - 200px);
+    height: 100%;
+  }
+}
