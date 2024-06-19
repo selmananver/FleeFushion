@@ -1,26 +1,53 @@
 import { useSelector, useDispatch } from "react-redux";
 import Currency from 'react-currency-formatter';
-import { selectitems, emptycart,selecttotal } from "./slices/cartslice";
+import { selectitems, emptycart, selecttotal } from "./slices/cartslice";
 import { useState } from "react";
-import {signIn,useSession} from 'next-auth/react'
+import { signIn, useSession } from 'next-auth/react';
 import Head from "next/head";
 import Image from "next/image";
 import { CreditCardIcon } from "@heroicons/react/24/solid";
-import CartDish from './components/CartDish'
+import CartDish from './components/CartDish';
+import { loadStripe } from "@stripe/stripe-js";
+import axios from "axios";
+
+// Initialize Stripe
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 
 function Cart() {
-    const items = useSelector(selectitems)
-    const dispatch = useDispatch()
-    const total= useSelector(selecttotal)
+    const items = useSelector(selectitems);
+    const dispatch = useDispatch();
+    const total = useSelector(selecttotal);
     const [disabled, setDisabled] = useState(false);
-    const session =useSession()
+    const { data: session } = useSession();
+
+    const createcheckoutsession = async () => {
+        setDisabled(true)
+        try {
+            const stripe = await stripePromise;
+            const checkoutsession = await axios.post('/api/create-checkout-session', {
+                items: items,
+                email: session.user.email
+            })
+            const result = await stripe.redirectToCheckout({
+                sessionId: checkoutsession.data.id
+            })
+            if (result.error) {
+                alert(result.error.message)
+                console.log(result.error.message)
+            }
+        }
+        catch (err) {
+            console.log(err)
+        }
+        setDisabled(false)
+    }
 
     return (
         <>
             <Head>
-                <title>fleeFushion | Cart</title>
+                <title>fleeFusion | Cart</title>
             </Head>
-            <div className="bg-gray-100 py-10  md:px-6 heightFix">
+            <div className="bg-gray-100 py-10 md:px-6 heightFix">
                 <main className="max-w-screen-xl mx-auto">
                     {items?.length ? (
                         <div className="my-6 shadow rounded-md">
@@ -35,7 +62,9 @@ function Cart() {
                                             {items?.length}
                                         </span>
                                     </span>
-                                    <button className={`button-red py-2 px-8 xs:px-10 ${disabled ? "opacity-50" : ""}`} onClick={()=>dispatch(emptycart())}  disabled={disabled}>Empty Cart</button>
+                                    <button className={`button-red py-2 px-8 xs:px-10 ${disabled ? "opacity-50" : ""}`} onClick={() => dispatch(emptycart())} disabled={disabled}>
+                                        Empty Cart
+                                    </button>
                                 </div>
                                 {items.map((item, i) => (
                                     <CartDish key={`cart-dish-${item?._id}`}
@@ -50,8 +79,6 @@ function Cart() {
                                         disabled={disabled}
                                     />
                                 ))}
-
-
                             </div>
                         </div>
                     ) : (
@@ -73,11 +100,9 @@ function Cart() {
                                 </span>
                             </h2>
                             {session ? (
-                                <button role="link" className={`button mt-6 flex items-center justify-center lg:text-lg text-base py-2 ${disabled ? "opacity-50" : ""}`}>
-                                   
-                                    <CreditCardIcon className="sm:w-6 w-5"/>
-                                        <span className="ml-2">Proceed to Checkout</span>
-                                   
+                                <button role="link" className={`button mt-6 flex items-center justify-center lg:text-lg text-base py-2 ${disabled ? "opacity-50" : ""}`} onClick={!disabled ? createcheckoutsession : () => { }} disabled={disabled}>
+                                    <CreditCardIcon className="sm:w-6 w-5" />
+                                    <span className="ml-2">Proceed to Checkout</span>
                                 </button>
                             ) : (
                                 <button role="link" className="button mt-6 lg:text-lg text-base py-2" onClick={signIn}>
@@ -90,8 +115,8 @@ function Cart() {
                     )}
                 </main>
             </div>
-
         </>
-    )
+    );
 }
-export default Cart
+
+export default Cart;

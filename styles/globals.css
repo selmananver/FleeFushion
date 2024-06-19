@@ -21,7 +21,10 @@
     @apply cursor-pointer rounded text-center p-2 text-sm  text-white  bg-gradient-to-b from-red-500 to-red-800 border-red-500  focus:outline-none focus:ring-2 focus:ring-red-500 active:from-red-800;
   }
 }
-
+.heightFix {
+  min-height: calc(100vh - 150px);
+  height: 100%;
+}
 
 .heading::after {
   display: block;

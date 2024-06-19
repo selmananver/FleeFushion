@@ -20,7 +20,7 @@ const gmailHandler =()=>{
             <div className='flex justify-between items-center'>
                 <div className='flex items-center lg:space-x-8 space-x-4'>
                   <Link href=''>
-                    <span className='cursor-pointer hover:text-white'>Home</span>
+                    <span className='cursor-pointer hover:text-white' onClick={()=>router.push('/')}>Home</span>
                   </Link>
                   <Link href=''>
                     <span className='cursor-pointer hover:text-white'>Orders</span>

@@ -1,6 +1,7 @@
 import { useSession } from "next-auth/react";
 import Head from "next/head";
 import { Fade } from "react-reveal";
+import Image from "next/image";
 
 function Profile() {
     const { data: session } = useSession()
@@ -15,7 +16,7 @@ function Profile() {
                     </h3>
                     <div className="sm:space-y-4 space-y-3 font-medium overflow-hidden sm:text-base text-sm">
                         <Fade Top>
-                            <img src={session?.user?.image || "/img/profile_pic.svg"} loading='lazy' alt='' width="80" height="80" className='object-contain sm:w-24 sm:h-24 w-20 h-20 rounded-full  hover:shadow-md' />
+                            <Image src={session?.user?.image || "/img/profile_pic.svg"} loading='lazy' alt='' width="80" height="80" className='object-contain sm:w-24 sm:h-24 w-20 h-20 rounded-full  hover:shadow-md' />
                             <p>
                                 <span className="font-medium sm:text-lg text-base mr-1">
                                     Name -
@@ -42,4 +43,5 @@ function Profile() {
     )
 }
 Profile.auth=true
+
 export default Profile

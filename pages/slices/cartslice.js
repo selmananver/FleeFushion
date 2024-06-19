@@ -11,14 +11,15 @@ export const cartslice = createSlice({
             return action.payload
         },
         addtocart:(state,action)=>{
-            const index =state.items.findIndex((cartitem)=>{
+            const index =state.items.findIndex((cartitem)=>
                 cartitem._id ===action.payload._id
-            })
+             )
+        
             if(index>=0){
                 let newcart =[...state.items]
                 newcart[index]={
                     ...newcart[index],
-                    qty:newcart[index].qty+1
+                    qty:newcart[index].qty + 1
                 }
                 state.items =newcart
             }

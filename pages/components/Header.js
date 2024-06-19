@@ -35,7 +35,7 @@ function Header() {
                     
                         <><span className='relative' onClick={() => setDropdown((value) => !value)}>
                                     <span className='flex items-center cursor-pointer'>
-                                        <img src={session.user.image || "/img/profile_pic.svg"} loading='lazy' alt='' width="24" height="24" className='object-contain w-10 h-10 rounded-full mr-1 hover:shadow-md' />
+                                        <Image src={session?.user?.image || "/img/profile_pic.svg"} loading='lazy' alt='' width="24" height="24" className='object-contain w-10 h-10 rounded-full mr-1 hover:shadow-md' />
                                         <ChevronDownIcon className='lg:w-6 w-4' />
                                     </span>
                                     {isDropdownOpen && (
@@ -52,7 +52,7 @@ function Header() {
             
         
 
-            <span className='link'>Orders</span>
+            <span className='link' onClick={()=>router.push('/orders')}>Orders</span>
             <span className='link' onClick={() => router.push('/about')}>About</span>
             <div className='relative cursor-pointer' onClick={() => router.push('/cart')}>
                 <ShoppingCartIcon className='xl:w-10 lg:w-9 w-8 link' />

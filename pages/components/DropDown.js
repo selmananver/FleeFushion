@@ -13,17 +13,17 @@ function DropDown({ hideDropDown }) {
    DropDown.handleClickOutside= handleClickOutside
     return (
         <div className="font-medium w-36 bg-white text-sm rounded shadow overflow-hidden border border-gray-100">
-            {session && session.admin &&(
-                <div className="dropdownOption border-b border-gray-200" >Dashboard
+            {session && session?.admin &&(
+                <div className="dropdownOption border-b border-gray-200"  onClick={()=>router.push('/admin/dashboard')}>Dashboard
                 </div>
             )}
             <div className="dropdownOption border-b border-gray-200" onClick={()=>router.push('/profile')}>Profile
             </div>
-            <div className="dropdownOption border-b border-gray-200">Orders
+            <div className="dropdownOption border-b border-gray-200" onClick={()=>router.push('/orders')}>Orders
             </div>
             <div className="dropdownOption border-b border-gray-200" onClick={()=>router.push('/about')}>Contact
             </div>
-            <div className="dropdownOption border-b border-gray-200" onClick={signOut}>Logout
+            <div className="dropdownOption border-b border-gray-200" onClick={()=>signOut({callbackUrl:'/',redirect:true})}>Logout
             </div>
         </div>
     )
