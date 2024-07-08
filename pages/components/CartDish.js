@@ -1,7 +1,7 @@
 import React from 'react'
 import { MinusIcon, PlusIcon } from '@heroicons/react/24/solid'
 import Image from 'next/image'
-import Currency from 'react-currency-formatter'
+import CurrencyFormatter from './currencyformatter/CurrencyFormatter'
 import { useDispatch } from 'react-redux'
 import {updateqty,removefromcart} from '../slices/cartslice'
 
@@ -57,9 +57,9 @@ function CartDish({ _id, title, price, description, category, image, qty, border
                     {description}
                 </p>
                 <span className='font-medium md:text-base text-sm'>
-                    {qty} * <Currency quantity={price} currency='INR' />=
+                    {qty} * <CurrencyFormatter quantity={price} currency='INR' />=
                     <span className='font-bold text-gray-700 mx-1'>
-                        <Currency quantity={total} currency='INR' />
+                        <CurrencyFormatter quantity={total} currency='INR' />
                     </span>
                 </span>
             </div>

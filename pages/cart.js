@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import Currency from 'react-currency-formatter';
+import CurrencyFormatter from "./components/currencyformatter/CurrencyFormatter";
 import { selectitems, emptycart, selecttotal } from "./slices/cartslice";
 import { useState } from "react";
 import { signIn, useSession } from 'next-auth/react';
@@ -96,7 +96,7 @@ function Cart() {
                             <h2 className="whitespace-nowrap font-semibold overflow-x-auto hideScrollBar">
                                 SubTotal ({items.length} items):
                                 <span className="font-bold text-red-500 mx-2">
-                                    <Currency quantity={total} currency="INR" />
+                                    <CurrencyFormatter quantity={total} currency="INR" />
                                 </span>
                             </h2>
                             {session ? (

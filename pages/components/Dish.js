@@ -1,6 +1,6 @@
 
 import Image from "next/image";
-import Currency from "react-currency-formatter";
+import CurrencyFormatter from "./currencyformatter/CurrencyFormatter";
 import { useDispatch } from "react-redux";
 import {addtocart} from '../slices/cartslice'
 function Dish({ _id, title, price, description, category, image }) {
@@ -39,7 +39,7 @@ return (
       {description}
     </p>
     <div className="mb-5 mt-2 font-bold text-gray-700">
-      <Currency quantity={price} currency="INR" />
+      <CurrencyFormatter quantity={price} currency="INR" />
     </div>
     <button
       className="mt-auto button flex items-center justify-center" onClick={additemtocart}
