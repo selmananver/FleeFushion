@@ -14,7 +14,8 @@ function Dish({ _id, title, price, description, category, image }) {
         qty:1,
         description,
         category,
-        image
+        image,
+        toast:true
       })
     )
   }

@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import addedToCartToast from "../components/utils/Toast/addedToCartToast";
 const initialState ={
     items:[]
 }
@@ -26,6 +27,9 @@ export const cartslice = createSlice({
             else {
                 let item ={...action.payload}
                 state.items =[...state.items,item]
+            }
+            if(action.payload.toast){
+                addedToCartToast(action.payload.image,action.payload.title);
             }
         },
         updateqty:(state,action)=>{
