@@ -3,7 +3,7 @@ import Skeleton from 'react-loading-skeleton'
 import useSWR from 'swr'
 import moment from 'moment'
 import { useSession } from 'next-auth/react'
-import CurrencyFormatter from './currencyformatter/CurrencyFormatter'
+import Currency from 'react-currency-formatter'
 import OrderItem from './OrderItem'
 function OrderDetails({ id, admin }) {
     const fetcher = url => fetch(url).then(res => res.json())
@@ -123,11 +123,11 @@ function OrderDetails({ id, admin }) {
                                     <div className='text-sm text-gray-700'>
                                         <p>
                                             <span className='font-semibold'>SubTotal - </span>
-                                            <CurrencyFormatter quantity={order?.amount_subtotal / 100} currency='INR' />
+                                            <Currency quantity={order?.amount_subtotal / 100} currency='INR' />
                                         </p>
                                         <p className='font-bold text-red-500'>
                                             <span className='font-semibold'>Total - </span>
-                                            <CurrencyFormatter quantity={order?.amount_total / 100} currency='INR' />
+                                            <Currency quantity={order?.amount_total / 100} currency='INR' />
                                         </p>
                                     </div>
                                 </div>

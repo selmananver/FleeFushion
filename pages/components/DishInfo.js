@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
-import CurrencyFormatter from './currencyformatter/CurrencyFormatter'
+import Currency from 'react-currency-formatter'
 import Image from 'next/image'
 import axios from 'axios'
 import NormalToast from './utils/NormalToast'
@@ -30,7 +30,7 @@ function DishInfo({ _id, title, price, description, category, image, border, rem
                 <div>
                     <p className='font-semibold'>
                         <span className='font-normal'>Price -</span>
-                        <CurrencyFormatter quantity={price} currency='INR' />
+                        <Currency quantity={price} currency='INR' />
                     </p>
                 </div>
                 <div className='flex items-center gap-4 pt-4'>

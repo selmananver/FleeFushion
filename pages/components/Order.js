@@ -1,7 +1,7 @@
 import moment from "moment";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import CurrencyFormatter from "./currencyformatter/CurrencyFormatter";
+import Currency from "react-currency-formatter";
 import axios from "axios";
 import { useState } from "react";
 
@@ -98,7 +98,7 @@ function Order({ _id, id, amount_total, timestamp, items, status, admin }) {
                 <div>
                   <p className="text-xs font-bold">TOTAL</p>
                   <p className="text-xs font-bold text-red-500">
-                    <CurrencyFormatter quantity={amount_total} currency="INR" />
+                    <Currency quantity={amount_total} currency="INR" />
                   </p>
                 </div>
               </div>

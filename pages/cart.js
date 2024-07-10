@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
-import CurrencyFormatter from "./components/currencyformatter/CurrencyFormatter";
-import { selectitems, emptycart, selecttotal } from "./slices/cartslice";
+import { useEffect } from "react";
+import Currency from 'react-currency-formatter';
+import { selectitems, emptycart, selecttotal,hydrate } from "./slices/cartslice";
 import { useState } from "react";
 import { signIn, useSession } from 'next-auth/react';
 import Head from "next/head";
@@ -19,6 +20,12 @@ function Cart() {
     const total = useSelector(selecttotal);
     const [disabled, setDisabled] = useState(false);
     const { data: session } = useSession();
+   useEffect(()=>{
+    const storeditems =localStorage.getItem('cartItems')
+    if(storeditems){
+        dispatch(hydrate({items:JSON.parse(storeditems)}))
+    }
+},[dispatch])
 
     const createcheckoutsession = async () => {
         setDisabled(true)
@@ -49,7 +56,7 @@ function Cart() {
             </Head>
             <div className="bg-gray-100 py-10 md:px-6 heightFix">
                 <main className="max-w-screen-xl mx-auto">
-                    {items?.length ? (
+                    {items?.length? (
                         <div className="my-6 shadow rounded-md">
                             <div className="flex flex-col md:p-8 p-6 bg-white">
                                 <h1 className="sm:text-2xl text-xl font-semibold border-b-2 border-gray-200 pb-4 text-gray-700">
@@ -96,7 +103,7 @@ function Cart() {
                             <h2 className="whitespace-nowrap font-semibold overflow-x-auto hideScrollBar">
                                 SubTotal ({items.length} items):
                                 <span className="font-bold text-red-500 mx-2">
-                                    <CurrencyFormatter quantity={total} currency="INR" />
+                                    <Currency quantity={total} currency="INR" />
                                 </span>
                             </h2>
                             {session ? (

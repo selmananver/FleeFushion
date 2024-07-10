@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import CurrencyFormatter from './currencyformatter/CurrencyFormatter'
+import Currency from 'react-currency-formatter'
 
 
 function OrderItem({ item }) {
@@ -16,7 +16,7 @@ function OrderItem({ item }) {
                     </p>
                     <p className='font-semibold'>
                         <span className='font-normal'>Price - </span>
-                        <CurrencyFormatter quantity={item?.price} currency='INR'/>
+                        <Currency quantity={item?.price} currency='INR'></Currency>
                     </p>
                 </div>
             </div>
